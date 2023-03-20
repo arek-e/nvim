@@ -19,6 +19,7 @@ return {
             -- Replace these with whatever servers you want to install
             'rust_analyzer',
             'tsserver',
+            'tailwindcss',
           }
         })
 
