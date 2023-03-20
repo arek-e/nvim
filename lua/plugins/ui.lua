@@ -84,26 +84,6 @@ return {
     end
   },
   {
-    'lewis6991/hover.nvim',
-    enabled = true,
-    event = 'LspAttach',
-    require = 'nvim-lspconfig',
-    config = function()
-      require('hover').setup {
-        init = function()
-          -- Require providers
-          require('hover.providers.lsp')
-          require('hover.providers.man')
-        end,
-        preview_opts = {
-          border = 'rounded',
-        },
-        title = true
-      }
-      vim.keymap.set('n', 'K', require('hover').hover, { desc = 'hover.nvim' })
-    end
-  },
-  {
     'hood/popui.nvim',
     disable = false,
     config = function()

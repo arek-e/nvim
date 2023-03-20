@@ -13,7 +13,6 @@ return {
   {
       "neovim/nvim-lspconfig",
       config = function ()
-        local navic = require("nvim-navic")
         require('mason-lspconfig').setup({
           ensure_installed = {
             -- Replace these with whatever servers you want to install
@@ -25,9 +24,6 @@ return {
 
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
         local lsp_attach = function(client, bufnr)
-          if client.server_capabilities.documentSymbolProvider then
-            navic.attach(client, bufnr)
-          end
         end
 
         local lspconfig = require('lspconfig')
@@ -40,6 +36,12 @@ return {
           end,
         })
       end
+  },
+  {
+    'edgedb/edgedb-vim',
+  },
+  {
+    "imsnif/kdl.vim"
   }
 
 
