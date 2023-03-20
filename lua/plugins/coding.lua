@@ -60,6 +60,4 @@ return {
   },
   { 'mattn/emmet-vim', ft = { 'html', 'css', 'scss', 'xml' } },
   { 'windwp/nvim-ts-autotag' }
-
-
 }
