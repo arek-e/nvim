@@ -99,5 +99,10 @@ return {
         },
       },
     },
+    config = function()
+      if not vim.fn.has('macunix') then
+        require 'nvim-treesitter.install'.compilers = { "clang" }
+      end
+    end,
   },
 }
