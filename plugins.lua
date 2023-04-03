@@ -48,10 +48,132 @@ local plugins = {
   },
 
   -- To make a plugin not be loaded
+  {
+    "NvChad/nvim-colorizer.lua",
+    enabled = true
+  },
+
+  {
+    'echasnovski/mini.animate',
+    version = '*',
+    lazy = false,
+    config = function () require('mini.animate').setup() end
+  },
+  {
+    'echasnovski/mini.indentscope',
+    version = '*',
+    lazy = false,
+    config = function ()
+      require('mini.indentscope').setup({
+        symbol = '╎',
+      })
+    end
+  },
+  {
+    'echasnovski/mini.sessions',
+    version = '*',
+    lazy = false,
+    config = function ()
+      require('mini.sessions').setup()
+    end
+  },
+
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
+  {
+    'hood/popui.nvim',
+    disable = false,
+    config = function()
+      vim.ui.select = require('popui.ui-overrider')
+      vim.ui.input = require('popui.input-overrider')
+    end
+  },
   -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
+  --   "giusgad/pets.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "giusgad/hologram.nvim"
+  --   },
+  --   config = function()
+  --     require("pets").setup({ })
+  --   end,
   -- },
+  --
+  {
+    "m4xshen/smartcolumn.nvim",
+    opts = {
+      colorcolumn = "90",
+    }
+  },
+  {
+    -- WINDOW PICKER
+    "s1n7ax/nvim-window-picker",
+    keys="<leader><leader>w",
+    version = "v1.*",
+    config = function()
+      local picker = require("window-picker")
+      picker.setup({ fg_color = "#000000" })
+
+      vim.keymap.set("n", "<leader><leader>w", function()
+        local picked_window_id =
+        picker.pick_window() or vim.api.nvim_get_current_win()
+        vim.api.nvim_set_current_win(picked_window_id)
+      end, { desc = "Pick a window" })
+    end
+  },
+  {
+    -- windows.nvim is more like the traditional <Ctrl-w>_ and <Ctrl-w>|
+    "anuvyklack/windows.nvim",
+    dependencies = { "anuvyklack/middleclass" },
+    keys={"<C-w>,,","<C-w>_","<C-w>|","<C-w>="},
+    config = function()
+      vim.o.winwidth = 1
+      vim.o.winminwidth = 0
+      vim.o.equalalways = false
+      require("windows").setup({
+        autowidth = {
+          enable = false -- prevents messing up simrat39/symbols-outline.nvim (e.g. relative width of side-bar was being made larger)
+        }
+      })
+
+      local function cmd(command)
+        return table.concat({ "<Cmd>", command, "<CR>" })
+      end
+
+      vim.keymap.set("n", "<C-w>,,", cmd "WindowsMaximize")
+      vim.keymap.set("n", "<C-w>_", cmd "WindowsMaximizeVertically")
+      vim.keymap.set("n", "<C-w>|", cmd "WindowsMaximizeHorizontally")
+      vim.keymap.set("n", "<C-w>=", cmd "WindowsEqualize")
+    end
+  },
+  -- add nvim-ufo
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      "kevinhwang91/promise-async",
+      {
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          local builtin = require("statuscol.builtin")
+          require("statuscol").setup(
+            {
+              relculright = true,
+              segments = {
+                {text = {builtin.foldfunc}, click = "v:lua.ScFa"},
+                {text = {"%s"}, click = "v:lua.ScSa"},
+                {text = {builtin.lnumfunc, " "}, click = "v:lua.ScLa"}
+              }
+            }
+          )
+        end
+
+      }
+    },
+    event = "BufReadPost",
+    opts = {},
+    config = function()
+      require "custom.configs.nvim-ufo"
+    end,
+  },
 
 }
 
