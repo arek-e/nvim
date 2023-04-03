@@ -43,6 +43,11 @@ local plugins = {
   },
 
   {
+    "github/copilot.vim",
+    lazy = false,
+  },
+
+  {
     "simrat39/rust-tools.nvim",
     dependencies = {
       "mfussenegger/nvim-dap",
@@ -122,6 +127,51 @@ local plugins = {
     config = function ()
       require('mini.sessions').setup()
     end
+  },
+  {
+    'echasnovski/mini.move',
+    version = '*',
+    lazy = false,
+    config = function ()
+      require('mini.move').setup()
+    end
+  },
+  {
+    'Wansmer/treesj',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require'treesj'.setup {
+        use_default_keymaps = false,
+      }
+
+      local langs = require'treesj.langs'['presets']
+
+      vim.api.nvim_create_autocmd({ 'FileType' }, {
+        pattern = '*',
+        callback = function()
+          local opts = { buffer = true }
+          if langs[vim.bo.filetype] then
+            vim.keymap.set('n', 'gS', '<Cmd>TSJSplit<CR>', opts)
+            vim.keymap.set('n', 'gJ', '<Cmd>TSJJoin<CR>', opts)
+          else
+            vim.keymap.set('n', 'gS', '<Cmd>SplitjoinSplit<CR>', opts)
+            vim.keymap.set('n', 'gJ', '<Cmd>SplitjoinJoin<CR>', opts)
+          end
+        end,
+      })
+
+    end,
+  },
+  { 'mattn/emmet-vim', ft = { 'html', 'css', 'scss', 'xml' } },
+  {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+  },
+  {
+    'm-demare/hlargs.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
   },
 
   { "stevearc/dressing.nvim", event = "VeryLazy" },

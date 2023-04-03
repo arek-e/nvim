@@ -18,6 +18,14 @@ local function toggle_diagnostics()
   end
 end
 
+vim.g.copilot_no_tab_map = true
+M.copilot = {
+  mode_opts = { expr = true },
+  i = {
+    ["<C-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion" },
+  },
+}
+
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
