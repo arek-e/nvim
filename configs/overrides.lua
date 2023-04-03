@@ -6,7 +6,23 @@ M.treesitter = {
     "lua",
     "html",
     "css",
+    "scss",
+    "rust",
+    "regex",
+    "sql",
+    "c_sharp",
+    "dart",
+    "dockerfile",
+    "gitignore",
+    "java",
+    "json",
     "javascript",
+    "prisma",
+    "python",
+    "svelte",
+    "toml",
+    "yaml",
+    "yuck",
     "typescript",
     "tsx",
     "c",
@@ -32,7 +48,22 @@ M.mason = {
     "html-lsp",
     "typescript-language-server",
     "deno",
-    "prettier"
+    "prettier",
+    "rustywind",
+    "jsonlint",
+    "json-lsp",
+    "eslint_d",
+    "angular-language-server",
+    "djlint",
+
+    -- C#
+    "csharpier",
+    "csharp-language-server",
+
+    -- rusty
+    "rust_analyzer",
+    "rustfmt",
+    "codelldb",
   },
 }
 
@@ -56,6 +87,10 @@ M.nvimtree = {
       },
     },
   },
+}
+
+M.telescope = {
+  extensions_list = { "themes", "terms", "flutter" },
 }
 
 return M
