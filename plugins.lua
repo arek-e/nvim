@@ -87,17 +87,7 @@ local plugins = {
       vim.ui.input = require('popui.input-overrider')
     end
   },
-  -- {
-  --   "giusgad/pets.nvim",
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "giusgad/hologram.nvim"
-  --   },
-  --   config = function()
-  --     require("pets").setup({ })
-  --   end,
-  -- },
-  --
+
   {
     "m4xshen/smartcolumn.nvim",
     opts = {
@@ -152,6 +142,7 @@ local plugins = {
       "kevinhwang91/promise-async",
       {
         "luukvbaal/statuscol.nvim",
+        enabled = true,
         config = function()
           local builtin = require("statuscol.builtin")
           require("statuscol").setup(
@@ -174,6 +165,15 @@ local plugins = {
       require "custom.configs.nvim-ufo"
     end,
   },
+  --better inline lsp diagnostics
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    event = 'BufEnter',
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
+
 
 }
 

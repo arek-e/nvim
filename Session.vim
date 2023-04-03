@@ -13,22 +13,23 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +161 plugins.lua
-badd +53 ~/AppData/Local/nvim/lua/custom/configs/nvim-ufo.lua
-badd +10 ~/AppData/Local/nvim/lua/custom/init.lua
+badd +20 plugins.lua
+badd +3 ~/AppData/Local/nvim/lua/custom/configs/nvim-ufo.lua
+badd +13 ~/AppData/Local/nvim/lua/custom/init.lua
+badd +11 ~/AppData/Local/nvim/lua/custom/mappings.lua
+badd +11 ~/AppData/Local/nvim/lua/custom/chadrc.lua
+badd +1 ~/AppData/Local/nvim/lua/custom/highlights.lua
+badd +12 ~/AppData/Local/nvim/lua/custom/configs/lspconfig.lua
 badd +1 NvimTree_1
 argglobal
 %argdel
-edit ~/AppData/Local/nvim/lua/custom/configs/nvim-ufo.lua
+edit ~/AppData/Local/nvim/lua/custom/init.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
-wincmd _ | wincmd |
-vsplit
-2wincmd h
-wincmd w
+1wincmd h
 wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
@@ -39,11 +40,10 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 88 + 104) / 209)
-exe 'vert 2resize ' . ((&columns * 89 + 104) / 209)
-exe 'vert 3resize ' . ((&columns * 30 + 104) / 209)
+exe 'vert 1resize ' . ((&columns * 178 + 104) / 209)
+exe 'vert 2resize ' . ((&columns * 30 + 104) / 209)
 argglobal
-balt plugins.lua
+balt ~/AppData/Local/nvim/lua/custom/mappings.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -53,47 +53,13 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-3,5fold
-24,26fold
-16,28fold
-13,30fold
-7,33fold
-36,38fold
-41,45fold
-46,51fold
-40,52fold
-35,53fold
+14,17fold
 let &fdl = &fdl
-let s:l = 53 - ((42 * winheight(0) + 22) / 44)
+let s:l = 13 - ((12 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 53
-normal! 0
-wincmd w
-argglobal
-if bufexists(fnamemodify("~/AppData/Local/nvim/lua/custom/init.lua", ":p")) | buffer ~/AppData/Local/nvim/lua/custom/init.lua | else | edit ~/AppData/Local/nvim/lua/custom/init.lua | endif
-if &buftype ==# 'terminal'
-  silent file ~/AppData/Local/nvim/lua/custom/init.lua
-endif
-balt ~/AppData/Local/nvim/lua/custom/configs/nvim-ufo.lua
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=99
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-13,15fold
-19,22fold
-let &fdl = &fdl
-let s:l = 10 - ((9 * winheight(0) + 22) / 44)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 10
+keepjumps 13
 normal! 0
 wincmd w
 argglobal
@@ -119,15 +85,14 @@ normal! zt
 keepjumps 1
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 88 + 104) / 209)
-exe 'vert 2resize ' . ((&columns * 89 + 104) / 209)
-exe 'vert 3resize ' . ((&columns * 30 + 104) / 209)
+exe 'vert 1resize ' . ((&columns * 178 + 104) / 209)
+exe 'vert 2resize ' . ((&columns * 30 + 104) / 209)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20
+set winheight=1 winwidth=1
 let &shortmess = s:shortmess_save
 let &winminheight = s:save_winminheight
 let &winminwidth = s:save_winminwidth

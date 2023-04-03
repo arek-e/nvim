@@ -10,11 +10,6 @@ opt.foldenable = true
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.cmd("au BufEnter * silent! set foldlevelstart = 99")
 
-vim.diagnostic.config({
-  virtual_text = false,
-})
-
-
 -- Auto resize panes when resizing nvim window
 autocmd("VimResized", {
   pattern = "*",
