@@ -61,7 +61,7 @@ M.mason = {
     "csharp-language-server",
 
     -- rusty
-    "rust_analyzer",
+    "rust-analyzer",
     "rustfmt",
     "codelldb",
   },

@@ -22,6 +22,7 @@ vim.g.copilot_no_tab_map = true
 M.copilot = {
    i = {
     ["<M-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true }},
+    ["<C-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true }},
   },
 }
 
