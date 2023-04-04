@@ -66,7 +66,6 @@ local plugins = {
         },
       })
     end
-
   },
 
   {
@@ -87,8 +86,6 @@ local plugins = {
       "rcarriga/nvim-dap-ui"
     }
   },
-
-
   -- Install a plugin
   {
     "max397574/better-escape.nvim",
