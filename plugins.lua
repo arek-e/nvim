@@ -44,10 +44,6 @@ local plugins = {
   {
     "NvChad/nvterm",
     opts = overrides.nvterm,
-    -- config = function(_, opts)
-    --   require "base46.term"
-    --   require("nvterm").setup(opts)
-    -- end,
   },
 
   {
@@ -86,10 +82,6 @@ local plugins = {
     config = function ()
       require("flutter-tools").setup {} -- use defaults
     end
-  },
-
-  {
-    "mfussenegger/nvim-jdtls",
   },
 
   {
