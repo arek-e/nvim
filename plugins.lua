@@ -41,6 +41,14 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     opts = overrides.telescope,
   },
+  {
+    "NvChad/nvterm",
+    opts = overrides.nvterm,
+    -- config = function(_, opts)
+    --   require "base46.term"
+    --   require("nvterm").setup(opts)
+    -- end,
+  },
 
   {
     "github/copilot.vim",
@@ -78,6 +86,10 @@ local plugins = {
     config = function ()
       require("flutter-tools").setup {} -- use defaults
     end
+  },
+
+  {
+    "mfussenegger/nvim-jdtls",
   },
 
   {

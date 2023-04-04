@@ -21,7 +21,7 @@ end
 vim.g.copilot_no_tab_map = true
 M.copilot = {
    i = {
-    ["<C-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true }},
+    ["<M-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true }},
   },
 }
 
@@ -42,6 +42,18 @@ M.diagnostics = {
   n = {
     ["<leader>ll"] = {toggle_diagnostics, "toggle LSP lines"}
   }
+}
+
+M.git = {
+  n = {
+  ["<leader>gg"] = {
+    function()
+      local term = require("nvterm.terminal").new("float")
+      vim.api.nvim_chan_send(term.job_id, "lazygit\n")
+    end,
+    "open Lazygit",
+  },
+}
 }
 
 return M
