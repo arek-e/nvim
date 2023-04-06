@@ -31,6 +31,9 @@ local sources = {
   b.formatting.csharpier,
   b.diagnostics.semgrep.with{ extra_filetypes = {"cs"}}, -- TX, TSX, Ruby, Python, Java, Go  
 
+  -- Dart
+  b.formatting.dart_format,
+
   -- other
   b.code_actions.gitsigns,
 }

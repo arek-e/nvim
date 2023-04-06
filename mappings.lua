@@ -18,10 +18,22 @@ local function toggle_diagnostics()
   end
 end
 
+M.disabled = {
+  n = {
+    -- line numbers
+    ["<leader>n"] = "",
+    ["<leader>rn"] = "",
+  },
+  i = {
+    ["<C-e"] = ""
+  }
+
+}
+
+
 vim.g.copilot_no_tab_map = true
 M.copilot = {
    i = {
-    ["<M-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true }},
     ["<C-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true }},
   },
 }
@@ -36,6 +48,26 @@ M.mini = {
   n = {
     ["<leader>os"] = {cmd "lua require('mini.sessions').select()", "open sessions" }
   }
+}
+
+M.comment = {
+  plugin = true,
+  -- toggle comment in both modes
+  n = {
+    ["gcc"] = {
+      function()
+        require("Comment.api").toggle.linewise.current()
+      end,
+      "toggle comment",
+    },
+  },
+
+  v = {
+    ["gcc"] = {
+      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+      "toggle comment",
+    },
+  },
 }
 
 
