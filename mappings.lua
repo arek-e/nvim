@@ -49,6 +49,11 @@ M.mini = {
   },
 }
 
+M.lazy = {
+  ['<leader>pu'] = { cmd "Lazy update", "lazy update"},
+  ['<leader>pi'] = { cmd "Lazy install", "lazy install "},
+}
+
 M.flutter = {
   -- plugin = true,
 
