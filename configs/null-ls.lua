@@ -35,7 +35,7 @@ local sources = {
   b.formatting.dart_format,
 
   -- other
-  b.code_actions.gitsigns,
+  -- b.code_actions.gitsigns,
 }
 
 null_ls.setup {

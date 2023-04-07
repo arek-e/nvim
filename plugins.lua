@@ -21,6 +21,22 @@ local plugins = {
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
+  {
+    "glepnir/lspsaga.nvim",
+    event = "LspAttach",
+    config = function()
+      require("lspsaga").setup {
+        ui = {
+          code_action = "󰠠",
+        },
+      }
+    end,
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+      --Please make sure you install markdown and markdown_inline parser
+      { "nvim-treesitter/nvim-treesitter" },
+    },
+  },
 
   -- override plugin configs
   {
@@ -124,20 +140,18 @@ local plugins = {
     end,
   },
   {
-    "echasnovski/mini.sessions",
-    version = "*",
-    lazy = false,
-    config = function()
-      require("mini.sessions").setup()
-    end,
-  },
-  {
     "echasnovski/mini.move",
     version = "*",
     lazy = false,
     config = function()
       require("mini.move").setup()
     end,
+  },
+  {
+    "glepnir/dbsession.nvim",
+    lazy = false,
+    cmd = { "SessionSave", "SessionDelete", "SessionLoad" },
+    opts = {},
   },
   {
     "Wansmer/treesj",
@@ -271,25 +285,17 @@ local plugins = {
     "phaazon/hop.nvim",
     version = "v2", -- optional but strongly recommended
     event = "BufEnter",
-    keys = { "f", "F", "t", "T" },
+    opts =  {},
     config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
       require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
-
-      local hop = require "hop"
-      local directions = require("hop.hint").HintDirection
-      vim.keymap.set("", "f", function()
-        hop.hint_char2 { direction = directions.AFTER_CURSOR }
-      end, { remap = true })
-      vim.keymap.set("", "F", function()
-        hop.hint_char2 { direction = directions.BEFORE_CURSOR }
-      end, { remap = true })
-      vim.keymap.set("", "t", function()
-        hop.hint_patterns { direction = directions.AFTER_CURSOR }
-      end, { remap = true })
-      vim.keymap.set("", "T", function()
-        hop.hint_patterns { direction = directions.BEFORE_CURSOR }
-      end, { remap = true })
+    end,
+  },
+  {
+    "glepnir/flybuf.nvim",
+    cmd = "FlyBuf",
+    lazy = false,
+    config = function()
+      require("flybuf").setup {}
     end,
   },
 }

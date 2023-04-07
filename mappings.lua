@@ -31,7 +31,6 @@ M.disabled = {
 
 vim.g.copilot_no_tab_map = true
 M.copilot = {
-  plugin = true,
   i = {
     ["<C-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true } },
   },
@@ -43,22 +42,33 @@ M.general = {
   },
 }
 
-M.mini = {
+M.session = {
   n = {
-    ["<leader>os"] = { cmd "lua require('mini.sessions').select()", "open sessions" },
+    ["<leader>ss"] = { cmd "SessionSave", "save session" },
+    ["<leader>sl"] = { cmd "SessionLoad", "load session" },
   },
 }
 
 M.lazy = {
-  ['<leader>pu'] = { cmd "Lazy update", "lazy update"},
-  ['<leader>pi'] = { cmd "Lazy install", "lazy install "},
+  n = {
+    ["<leader>pu"] = { cmd "Lazy update", "lazy update" },
+    ["<leader>pi"] = { cmd "Lazy install", "lazy install " },
+  },
 }
 
-M.flutter = {
-  -- plugin = true,
+M.navigation = {
+  n = {
+    -- hop.nvim
+    ["f"] = { cmd "HopWordAC", "hop words after cursor" },
+    ["F"] = { cmd "HopWordBC", "hop words before cursor" },
+    ["t"] = { cmd "HopPatternAC", "hop patterns after cursor" },
+    ["T"] = { cmd "HopPatternBC", "hop patterns before cursor" },
+    -- flybuf.nvim
+    ["<leader>j"] = { cmd "FlyBuf", "open FlyBuf" },
+  },
+}
 
-  -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
-
+M.lspsaga = {
   n = {
     ["gD"] = {
       function()
@@ -67,19 +77,16 @@ M.flutter = {
       "lsp declaration",
     },
 
-    ["gd"] = {
-      function()
-        vim.lsp.buf.definition()
-      end,
-      "lsp definition",
-    },
-
-    ["K"] = {
-      function()
-        vim.lsp.buf.hover()
-      end,
-      "lsp hover",
-    },
+    ["K"] = { cmd "Lspsaga hover_doc", "lsp saga hover" },
+    ["[e"] = { cmd "Lspsaga diagnostic_jump_next", "lsp saga diagnostic next" },
+    ["]e"] = { cmd "Lspsaga diagnostic_jump_prev", "lsp saga diagnostic previous" },
+    ["ga"] = { cmd "Lspsaga code_action", "lsp saga " },
+    ["gd"] = { cmd "Lspsaga peek_definition", "lsp saga " },
+    ["gr"] = { cmd "Lspsaga rename", "lsp saga " },
+    ["gh"] = { cmd "Lspsaga lsp_finder", "lsp saga " },
+    ["<leader>o"] = { cmd "Lspsaga outline", "lsp saga " },
+    ["<leader>dw"] = { cmd "Lspsaga show_workspace_diagnostics", "lsp saga " },
+    ["<leader>db"] = { cmd "Lspsaga show_buf_diagnostics", "lsp saga " },
 
     ["gi"] = {
       function()
@@ -93,34 +100,6 @@ M.flutter = {
         vim.lsp.buf.signature_help()
       end,
       "lsp signature_help",
-    },
-
-    ["<leader>D"] = {
-      function()
-        vim.lsp.buf.type_definition()
-      end,
-      "lsp definition type",
-    },
-
-    ["<leader>ra"] = {
-      function()
-        require("nvchad_ui.renamer").open()
-      end,
-      "lsp rename",
-    },
-
-    ["<leader>ca"] = {
-      function()
-        vim.lsp.buf.code_action()
-      end,
-      "lsp code_action",
-    },
-
-    ["gr"] = {
-      function()
-        vim.lsp.buf.references()
-      end,
-      "lsp references",
     },
 
     ["<leader>fm"] = {
