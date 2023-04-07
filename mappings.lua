@@ -33,7 +33,8 @@ M.disabled = {
 
 vim.g.copilot_no_tab_map = true
 M.copilot = {
-   i = {
+  plugin = true,
+  i = {
     ["<C-e>"] = { 'copilot#Accept("<CR>")', "accept copilot suggestion", opts = { expr = true }},
   },
 }
@@ -48,6 +49,84 @@ M.mini = {
   n = {
     ["<leader>os"] = {cmd "lua require('mini.sessions').select()", "open sessions" }
   }
+}
+
+M.flutter = {
+  -- plugin = true,
+
+  -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
+
+  n = {
+    ["gD"] = {
+      function()
+        vim.lsp.buf.declaration()
+      end,
+      "lsp declaration",
+    },
+
+    ["gd"] = {
+      function()
+        vim.lsp.buf.definition()
+      end,
+      "lsp definition",
+    },
+
+    ["K"] = {
+      function()
+        vim.lsp.buf.hover()
+      end,
+      "lsp hover",
+    },
+
+    ["gi"] = {
+      function()
+        vim.lsp.buf.implementation()
+      end,
+      "lsp implementation",
+    },
+
+    ["<leader>ls"] = {
+      function()
+        vim.lsp.buf.signature_help()
+      end,
+      "lsp signature_help",
+    },
+
+    ["<leader>D"] = {
+      function()
+        vim.lsp.buf.type_definition()
+      end,
+      "lsp definition type",
+    },
+
+    ["<leader>ra"] = {
+      function()
+        require("nvchad_ui.renamer").open()
+      end,
+      "lsp rename",
+    },
+
+    ["<leader>ca"] = {
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      "lsp code_action",
+    },
+
+    ["gr"] = {
+      function()
+        vim.lsp.buf.references()
+      end,
+      "lsp references",
+    },
+
+    ["<leader>fm"] = {
+      function()
+        vim.lsp.buf.format { async = true }
+      end,
+      "lsp formatting",
+    },
+  },
 }
 
 M.comment = {
