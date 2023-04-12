@@ -178,6 +178,7 @@ local plugins = {
       })
     end,
   },
+  {"CRAG666/code_runner.nvim", config = true, event="LspAttach" },
   { "mattn/emmet-vim", ft = { "html", "css", "scss", "xml" } },
   {
     "windwp/nvim-ts-autotag",

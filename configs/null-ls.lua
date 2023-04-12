@@ -29,10 +29,16 @@ local sources = {
 
   -- C#
   b.formatting.csharpier,
-  b.diagnostics.semgrep.with{ extra_filetypes = {"cs"}}, -- TX, TSX, Ruby, Python, Java, Go  
+  b.diagnostics.semgrep.with{ extra_filetypes = {"cs"}, disabled_filetypes = { "python" }}, -- TX, TSX, Ruby, Python, Java, Go  
 
   -- Dart
   b.formatting.dart_format,
+
+  -- Python
+  -- b.diagnostics.flake8,
+  -- b.formatting.yapf
+  b.diagnostics.ruff,
+  b.formatting.ruff,
 
   -- other
   -- b.code_actions.gitsigns,

@@ -41,6 +41,17 @@ M.general = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
   },
 }
+M.code_runner = {
+  n = {
+    ["<leader>r"] = {cmd "RunCode", opts = {noremap = true, silent = false}},
+    ["<leader>rf"] = {cmd "RunFile", opts = {noremap = true, silent = false}},
+    ["<leader>rft"] = {cmd "RunFile tab", opts = {noremap = true, silent = false}},
+    ["<leader>rp"] = {cmd "RunProject", opts = {noremap = true, silent = false}},
+    ["<leader>rc"] = {cmd "RunClose", opts = {noremap = true, silent = false}},
+    ["<leader>crf"] = {cmd "CRFileType", opts = {noremap = true, silent = false}},
+    ["<leader>crp"] = {cmd "CRProjects", opts = {noremap = true, silent = false}},
+  }
+}
 
 M.session = {
   n = {
