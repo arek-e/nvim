@@ -22,6 +22,22 @@ local plugins = {
     end, -- Override to setup mason-lspconfig
   },
   {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup({
+        lsp_cfg = false,
+      })
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+  },
+  {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
     config = function()
@@ -178,7 +194,7 @@ local plugins = {
       })
     end,
   },
-  {"CRAG666/code_runner.nvim", config = true, event="LspAttach" },
+  { "CRAG666/code_runner.nvim", config = true, event = "LspAttach" },
   { "mattn/emmet-vim", ft = { "html", "css", "scss", "xml" } },
   {
     "windwp/nvim-ts-autotag",
@@ -286,7 +302,7 @@ local plugins = {
     "phaazon/hop.nvim",
     version = "v2", -- optional but strongly recommended
     event = "BufEnter",
-    opts =  {},
+    opts = {},
     config = function()
       require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
     end,

@@ -34,6 +34,15 @@ local sources = {
   -- Dart
   b.formatting.dart_format,
 
+  -- Go
+  b.diagnostics.revive,
+  b.formatting.golines.with({
+    extra_args = {
+      "--max-len=180",
+      "--base-formatter=gofumpt",
+    },
+  }),
+
   -- Python
   -- b.diagnostics.flake8,
   -- b.formatting.yapf
@@ -48,3 +57,6 @@ null_ls.setup {
   debug = true,
   sources = sources,
 }
+
+local gotest = require("go.null_ls").gotest()
+null_ls.register(gotest)

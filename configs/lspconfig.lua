@@ -7,7 +7,7 @@ vim.diagnostic.config({
 })
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "ruff_lsp" }
+local servers = { "html", "cssls", "tsserver", "clangd", "ruff_lsp", "angularls", "gopls" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -18,3 +18,6 @@ end
 
 -- 
 -- lspconfig.pyright.setup { blabla}
+--
+local cfg = require'go.lsp'.config() -- config() return the go.nvim gopls setup
+lspconfig.gopls.setup(cfg)
