@@ -29,7 +29,7 @@ local sources = {
 
   -- C#
   b.formatting.csharpier,
-  b.diagnostics.semgrep.with{ extra_filetypes = {"cs"}, disabled_filetypes = { "python" }}, -- TX, TSX, Ruby, Python, Java, Go  
+  b.diagnostics.semgrep.with{ extra_filetypes = {"cs"}, disabled_filetypes = { "python", "go" }, extra_args= {"--config", "auto"}}, -- TX, TSX, Ruby, Python, Java, Go  
 
   -- Dart
   b.formatting.dart_format,
@@ -53,10 +53,15 @@ local sources = {
   -- b.code_actions.gitsigns,
 }
 
+local gotest = require("go.null_ls").gotest()
+local gotest_codeaction = require("go.null_ls").gotest_action()
+local golangci_lint = require("go.null_ls").golangci_lint()
+table.insert(sources, gotest)
+table.insert(sources, golangci_lint)
+table.insert(sources, gotest_codeaction)
 null_ls.setup {
   debug = true,
   sources = sources,
 }
 
-local gotest = require("go.null_ls").gotest()
 null_ls.register(gotest)

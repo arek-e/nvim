@@ -5,6 +5,10 @@ local function cmd(command)
   return table.concat { "<cmd>", command, "<cr>" }
 end
 
+local function l(command)
+  return table.concat { "<cmd>lua ", command, "<cr>" }
+end
+
 local function toggle_diagnostics()
   local diagnostics_on = require("lsp_lines").toggle()
   if diagnostics_on then
@@ -29,6 +33,70 @@ M.disabled = {
   },
 }
 
+M.dap = {
+  n = {
+    ["<leader>dr"] = { l "require('go.dap').run()", "run" },
+    ["<leader>dc"] = { l "require('dap').continue()", "continue" },
+    ["<leader>dn"] = { l "require('dap').step_over()", "step over" },
+    ["<leader>ds"] = { l "require('dap').step_into()", "step into" },
+    ["<leader>do"] = { l "require('dap').step_out()", "step out" },
+    ["<leader>dS"] = {
+      function()
+        require("go.dap").stop(true)
+      end,
+      "stop debug session",
+    },
+    ["<leader>du"] = { l "require('dap').up()", "up" },
+    ["<leader>dD"] = { l "require('dap').down()", "down" },
+    ["<leader>dC"] = { l "require('dap').run_to_cursor()", "run to cursor" },
+    ["<leader>db"] = { l "require('dap').toggle_breakpoint()", "toggle breakpoint" },
+    ["<leader>dP"] = { l "require('dap').pause()", "pause" },
+    -- Dap UI
+    ["<leader>dp"] = {
+      function()
+        require("dapui").eval()
+      end,
+      "eval",
+    },
+    ["<leader>dK"] = {
+      function()
+        require("dapui").float_element()
+      end,
+      "float element",
+    },
+    ["<leader>dB"] = {
+      function()
+        require("dapui").float_element('break')
+      end,
+      "float breakpoints",
+    },
+    ["<leader>dR"] = {
+      function()
+        require("dapui").float_element "repl"
+      end,
+      "float repl",
+    },
+    ["<leader>dO"] = {
+      function()
+        require("dapui").float_element "scopes"
+      end,
+      "float scopes",
+    },
+    ["<leader>da"] = {
+      function()
+        require("dapui").float_element "stacks"
+      end,
+      "float stacks",
+    },
+    ["<leader>dw"] = {
+      function()
+        require("dapui").float_element "watches"
+      end,
+      "float watches",
+    },
+  },
+}
+
 vim.g.copilot_no_tab_map = true
 M.copilot = {
   i = {
@@ -43,14 +111,14 @@ M.general = {
 }
 M.code_runner = {
   n = {
-    ["<leader>r"] = {cmd "RunCode", opts = {noremap = true, silent = false}},
-    ["<leader>rf"] = {cmd "RunFile", opts = {noremap = true, silent = false}},
-    ["<leader>rft"] = {cmd "RunFile tab", opts = {noremap = true, silent = false}},
-    ["<leader>rp"] = {cmd "RunProject", opts = {noremap = true, silent = false}},
-    ["<leader>rc"] = {cmd "RunClose", opts = {noremap = true, silent = false}},
-    ["<leader>crf"] = {cmd "CRFileType", opts = {noremap = true, silent = false}},
-    ["<leader>crp"] = {cmd "CRProjects", opts = {noremap = true, silent = false}},
-  }
+    ["<leader>r"] = { cmd "RunCode", opts = { noremap = true, silent = false } },
+    ["<leader>rf"] = { cmd "RunFile", opts = { noremap = true, silent = false } },
+    ["<leader>rft"] = { cmd "RunFile tab", opts = { noremap = true, silent = false } },
+    ["<leader>rp"] = { cmd "RunProject", opts = { noremap = true, silent = false } },
+    ["<leader>rc"] = { cmd "RunClose", opts = { noremap = true, silent = false } },
+    ["<leader>crf"] = { cmd "CRFileType", opts = { noremap = true, silent = false } },
+    ["<leader>crp"] = { cmd "CRProjects", opts = { noremap = true, silent = false } },
+  },
 }
 
 M.session = {
@@ -91,13 +159,13 @@ M.lspsaga = {
     ["K"] = { cmd "Lspsaga hover_doc", "lsp saga hover" },
     ["[e"] = { cmd "Lspsaga diagnostic_jump_next", "lsp saga diagnostic next" },
     ["]e"] = { cmd "Lspsaga diagnostic_jump_prev", "lsp saga diagnostic previous" },
-    ["ga"] = { cmd "Lspsaga code_action", "lsp saga " },
-    ["gd"] = { cmd "Lspsaga peek_definition", "lsp saga " },
-    ["gr"] = { cmd "Lspsaga rename", "lsp saga " },
-    ["gh"] = { cmd "Lspsaga lsp_finder", "lsp saga " },
-    ["<leader>o"] = { cmd "Lspsaga outline", "lsp saga " },
-    ["<leader>dw"] = { cmd "Lspsaga show_workspace_diagnostics", "lsp saga " },
-    ["<leader>db"] = { cmd "Lspsaga show_buf_diagnostics", "lsp saga " },
+    ["ga"] = { cmd "Lspsaga code_action", "code action " },
+    ["gd"] = { cmd "Lspsaga peek_definition", "peek definition " },
+    ["gr"] = { cmd "Lspsaga rename", "rename " },
+    ["gh"] = { cmd "Lspsaga lsp_finder", "lsp finder " },
+    ["<leader>o"] = { cmd "Lspsaga outline", "outline" },
+    ["<leader>tw"] = { cmd "Lspsaga show_workspace_diagnostics", "workspace diagnostics" },
+    ["<leader>tb"] = { cmd "Lspsaga show_buf_diagnostics", "workspace diagnostics" },
 
     ["gi"] = {
       function()

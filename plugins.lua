@@ -29,9 +29,10 @@ local plugins = {
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
-      require("go").setup({
+      require("go").setup {
         lsp_cfg = false,
-      })
+        lsp_keymaps = false,
+      }
     end,
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
@@ -44,6 +45,13 @@ local plugins = {
       require("lspsaga").setup {
         ui = {
           code_action = "󰠠",
+        },
+        lightbulb = {
+          -- enable = true,
+          enable_in_insert = false,
+          sign = false,
+          -- sign_priority = 40,
+          virtual_text = true,
         },
       }
     end,
@@ -120,7 +128,15 @@ local plugins = {
     "mfussenegger/nvim-dap",
     dependencies = {
       "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
     },
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+    config = function()
+      require "custom.configs.nvim-jdtls"
+    end,
   },
   -- Install a plugin
   {
