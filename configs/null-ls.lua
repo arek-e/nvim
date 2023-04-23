@@ -12,14 +12,13 @@ local sources = {
   b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
   b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
   b.code_actions.eslint_d,
-  b.diagnostics.eslint_d,
+  b.formatting.rome,
   b.diagnostics.jsonlint,
   b.formatting.rustywind, -- Tailwindcss
   b.formatting.djlint,
 
   -- Rust
   b.formatting.rustfmt,
-
 
   -- Lua
   b.formatting.stylua,
@@ -36,6 +35,7 @@ local sources = {
 
   -- Go
   b.diagnostics.revive,
+  b.formatting.gofumpt,
   b.formatting.golines.with({
     extra_args = {
       "--max-len=180",
@@ -44,8 +44,6 @@ local sources = {
   }),
 
   -- Python
-  -- b.diagnostics.flake8,
-  -- b.formatting.yapf
   b.diagnostics.ruff,
   b.formatting.ruff,
 
@@ -53,15 +51,7 @@ local sources = {
   -- b.code_actions.gitsigns,
 }
 
-local gotest = require("go.null_ls").gotest()
-local gotest_codeaction = require("go.null_ls").gotest_action()
-local golangci_lint = require("go.null_ls").golangci_lint()
-table.insert(sources, gotest)
-table.insert(sources, golangci_lint)
-table.insert(sources, gotest_codeaction)
 null_ls.setup {
   debug = true,
   sources = sources,
 }
-
-null_ls.register(gotest)

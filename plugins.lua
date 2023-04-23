@@ -21,23 +21,7 @@ local plugins = {
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
-  {
-    "ray-x/go.nvim",
-    dependencies = { -- optional packages
-      "ray-x/guihua.lua",
-      "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("go").setup {
-        lsp_cfg = false,
-        lsp_keymaps = false,
-      }
-    end,
-    event = { "CmdlineEnter" },
-    ft = { "go", "gomod" },
-    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
-  },
+
   {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
@@ -61,6 +45,7 @@ local plugins = {
       { "nvim-treesitter/nvim-treesitter" },
     },
   },
+  { "nvim-treesitter/nvim-treesitter-angular" },
 
   -- override plugin configs
   {
@@ -93,21 +78,38 @@ local plugins = {
 
   {
     "simrat39/rust-tools.nvim",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-    },
-    lazy = false,
+    ft = "rust",
+    dependencies = "neovim/nvim-lspconfig",
+    opts = function()
+      require "custom.configs.rust-tools"
+    end,
+    config = function(_, opts)
+---@diagnostic disable-next-line: different-requires
+      require("rust-tools").setup(opts)
+    end,
+  },
+  {
+    "saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    version = "v0.3.0",
+    requires = { { "nvim-lua/plenary.nvim" } },
     config = function()
-      local rt = require "rust-tools"
-      rt.setup {
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-            -- Code action groups
-            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-          end,
+      require("crates").setup {
+        null_ls = {
+          enabled = true,
+          name = "crates.nvim",
         },
+      }
+    end,
+  },
+
+  {
+    "crispgm/nvim-go",
+    ft = "go",
+    config = function()
+      require("go").setup {
+        lint_prompt_style = "vt",
+        formatter = "gofumpt",
       }
     end,
   },
@@ -120,7 +122,18 @@ local plugins = {
       "stevearc/dressing.nvim", -- optional for vim.ui.select
     },
     config = function()
-      require("flutter-tools").setup {} -- use defaults
+      require("flutter-tools").setup {
+        lsp = {
+          color = { -- show the derived colours for dart variables
+            enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+            background = true, -- highlight the background
+            background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
+            foreground = false, -- highlight the foreground
+            virtual_text = true, -- show the highlight using virtual text
+            virtual_text_str = "", -- the virtual text character to highlight
+          },
+        },
+      } -- use defaults
     end,
   },
 
@@ -177,6 +190,14 @@ local plugins = {
     lazy = false,
     config = function()
       require("mini.move").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.surround",
+    version = "*",
+    lazy = false,
+    config = function()
+      require("mini.surround").setup()
     end,
   },
   {

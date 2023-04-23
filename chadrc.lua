@@ -7,6 +7,9 @@ local highlights = require "custom.highlights"
 M.ui = {
   theme = "bearded-arc",
   theme_toggle = { "bearded-arc", "gruvbox_light" },
+  cmp = {
+    style = "atom_colored"
+  },
 
   hl_override = highlights.override,
   hl_add = highlights.add,

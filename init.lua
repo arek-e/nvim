@@ -8,6 +8,8 @@ opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrea
 opt.foldlevelstart = 99
 opt.foldenable = true
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+opt.swapfile = false
+
 vim.cmd("au BufEnter * silent! set foldlevelstart = 99")
 
 -- Auto resize panes when resizing nvim window

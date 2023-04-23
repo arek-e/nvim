@@ -22,6 +22,7 @@ local function toggle_diagnostics()
   end
 end
 
+
 M.disabled = {
   n = {
     -- line numbers
@@ -109,10 +110,19 @@ M.general = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
   },
 }
+
+local function ft_runFile()
+  local filetype = vim.bo.filetype
+  if filetype == "dart" then
+    vim.cmd("FlutterRun")
+  else
+    vim.cmd("RunFile")
+  end
+end
 M.code_runner = {
   n = {
     ["<leader>r"] = { cmd "RunCode", opts = { noremap = true, silent = false } },
-    ["<leader>rf"] = { cmd "RunFile", opts = { noremap = true, silent = false } },
+    ["<leader>rf"] = { ft_runFile, "Run file", opts = { noremap = true, silent = false } },
     ["<leader>rft"] = { cmd "RunFile tab", opts = { noremap = true, silent = false } },
     ["<leader>rp"] = { cmd "RunProject", opts = { noremap = true, silent = false } },
     ["<leader>rc"] = { cmd "RunClose", opts = { noremap = true, silent = false } },
