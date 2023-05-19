@@ -28,6 +28,7 @@ M.treesitter = {
     "c",
     "markdown",
     "markdown_inline",
+    "go"
   },
   indent = {
     enable = true,
@@ -56,9 +57,7 @@ M.mason = {
     "angular-language-server",
     "djlint",
 
-    -- C#
-    "csharpier",
-    "csharp-language-server",
+    "gopls",
 
     -- rusty
     "rust-analyzer",

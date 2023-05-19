@@ -84,7 +84,7 @@ local plugins = {
       require "custom.configs.rust-tools"
     end,
     config = function(_, opts)
----@diagnostic disable-next-line: different-requires
+      ---@diagnostic disable-next-line: different-requires
       require("rust-tools").setup(opts)
     end,
   },
@@ -99,17 +99,6 @@ local plugins = {
           enabled = true,
           name = "crates.nvim",
         },
-      }
-    end,
-  },
-
-  {
-    "crispgm/nvim-go",
-    ft = "go",
-    config = function()
-      require("go").setup {
-        lint_prompt_style = "vt",
-        formatter = "gofumpt",
       }
     end,
   },
@@ -143,6 +132,18 @@ local plugins = {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
     },
+    init = function()
+      require("core.utils").load_mappings "dap"
+    end,
+  },
+  {
+    "leoluz/nvim-dap-go",
+    ft = "go",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function(_, opts)
+      require("dap-go").setup(opts)
+      require("core.utils").load_mappings "dap_go"
+    end,
   },
   {
     "mfussenegger/nvim-jdtls",
@@ -350,6 +351,44 @@ local plugins = {
     lazy = false,
     config = function()
       require("flybuf").setup {}
+    end,
+  },
+  {
+    "elixir-tools/elixir-tools.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local elixir = require "elixir"
+      local elixirls = require "elixir.elixirls"
+
+      elixir.setup {
+        credo = {},
+        elixirls = {
+          enabled = true,
+          settings = elixirls.settings {
+            dialyzerEnabled = false,
+            enableTestLenses = false,
+          },
+          on_attach = function(client, bufnr)
+            vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+            vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+            vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+          end,
+        },
+      }
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    config = function(_, opts)
+      require("gopher").setup(opts)
+      require("core.utils").load_mappings("gopher")
+    end,
+    build = function(_)
+      vim.cmd [[silent! GoInstallDeps]]
     end,
   },
 }

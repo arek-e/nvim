@@ -22,7 +22,6 @@ local function toggle_diagnostics()
   end
 end
 
-
 M.disabled = {
   n = {
     -- line numbers
@@ -35,65 +34,48 @@ M.disabled = {
 }
 
 M.dap = {
+  plugin = true,
   n = {
-    ["<leader>dr"] = { l "require('go.dap').run()", "run" },
-    ["<leader>dc"] = { l "require('dap').continue()", "continue" },
-    ["<leader>dn"] = { l "require('dap').step_over()", "step over" },
-    ["<leader>ds"] = { l "require('dap').step_into()", "step into" },
-    ["<leader>do"] = { l "require('dap').step_out()", "step out" },
-    ["<leader>dS"] = {
-      function()
-        require("go.dap").stop(true)
-      end,
-      "stop debug session",
-    },
-    ["<leader>du"] = { l "require('dap').up()", "up" },
-    ["<leader>dD"] = { l "require('dap').down()", "down" },
-    ["<leader>dC"] = { l "require('dap').run_to_cursor()", "run to cursor" },
     ["<leader>db"] = { l "require('dap').toggle_breakpoint()", "toggle breakpoint" },
-    ["<leader>dP"] = { l "require('dap').pause()", "pause" },
-    -- Dap UI
-    ["<leader>dp"] = {
+    ["<leader>dus"] = {
       function()
-        require("dapui").eval()
+        local widgets = require "dap.ui.widgets"
+        local sidebar = widgets.sidebar(widgets.scopes)
+        sidebar.open()
       end,
-      "eval",
+      "Open debugging sidebar",
     },
-    ["<leader>dK"] = {
+  },
+}
+
+M.dap_go = {
+  plugin = true,
+  n = {
+    ["<leader>dgt"] = {
       function()
-        require("dapui").float_element()
+        require("dap-go").debug_test()
       end,
-      "float element",
+      "Debug go test",
     },
-    ["<leader>dB"] = {
+    ["<leader>dgl"] = {
       function()
-        require("dapui").float_element('break')
+        require("dap-go").debug_last()
       end,
-      "float breakpoints",
+      "Debug last go test",
     },
-    ["<leader>dR"] = {
-      function()
-        require("dapui").float_element "repl"
-      end,
-      "float repl",
+  },
+}
+
+M.gopher = {
+  plugin = true,
+  n = {
+    ["<leader>gsj"] = {
+      cmd "GoTagAdd json",
+      "Add json struct tags",
     },
-    ["<leader>dO"] = {
-      function()
-        require("dapui").float_element "scopes"
-      end,
-      "float scopes",
-    },
-    ["<leader>da"] = {
-      function()
-        require("dapui").float_element "stacks"
-      end,
-      "float stacks",
-    },
-    ["<leader>dw"] = {
-      function()
-        require("dapui").float_element "watches"
-      end,
-      "float watches",
+    ["<leader>gsy"] = {
+      cmd "GoTagAdd yaml",
+      "Add yaml struct tags",
     },
   },
 }
@@ -114,9 +96,9 @@ M.general = {
 local function ft_runFile()
   local filetype = vim.bo.filetype
   if filetype == "dart" then
-    vim.cmd("FlutterRun")
+    vim.cmd "FlutterRun"
   else
-    vim.cmd("RunFile")
+    vim.cmd "RunFile"
   end
 end
 M.code_runner = {
