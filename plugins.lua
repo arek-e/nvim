@@ -77,11 +77,16 @@ local plugins = {
   },
 
   {
+    "rust-lang/rust.vim",
+    ft = "rust",
+  },
+  {
     "simrat39/rust-tools.nvim",
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
     opts = function()
-      require "custom.configs.rust-tools"
+      ---@diagnostic disable-next-line: redundant-return-value
+      return require "custom.configs.rust-tools"
     end,
     config = function(_, opts)
       ---@diagnostic disable-next-line: different-requires
@@ -100,6 +105,14 @@ local plugins = {
           name = "crates.nvim",
         },
       }
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      local M = require "plugins.configs.cmp"
+      table.insert(M.sources, { name = "crates" })
+      return M
     end,
   },
 
@@ -332,8 +345,29 @@ local plugins = {
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     event = "BufEnter",
+    enabled = false,
     config = function()
       require("lsp_lines").setup()
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    init = function()
+      require("core.utils").load_mappings "trouble"
+    end,
+    opts = {
+      severity = nil,
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    config = function()
+      vim.diagnostic.config {
+        virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
+        signs = { severity = { min = vim.diagnostic.severity.HINT } },
+        underline = { severity = { min = vim.diagnostic.severity.HINT } },
+      }
     end,
   },
   {
@@ -385,7 +419,7 @@ local plugins = {
     ft = "go",
     config = function(_, opts)
       require("gopher").setup(opts)
-      require("core.utils").load_mappings("gopher")
+      require("core.utils").load_mappings "gopher"
     end,
     build = function(_)
       vim.cmd [[silent! GoInstallDeps]]

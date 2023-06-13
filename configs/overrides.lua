@@ -28,7 +28,7 @@ M.treesitter = {
     "c",
     "markdown",
     "markdown_inline",
-    "go"
+    "go",
   },
   indent = {
     enable = true,
@@ -98,16 +98,16 @@ M.nvterm = {
     list = {},
     type_opts = {
       float = {
-        relative = 'editor',
+        relative = "editor",
         row = 0.05,
         col = 0.05,
         width = 0.9,
         height = 0.8,
         border = "single",
       },
-      horizontal = { location = "rightbelow", split_ratio = .3, },
-      vertical = { location = "rightbelow", split_ratio = .5 },
-    }
+      horizontal = { location = "rightbelow", split_ratio = 0.3 },
+      vertical = { location = "rightbelow", split_ratio = 0.5 },
+    },
   },
 }
 

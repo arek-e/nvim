@@ -1,3 +1,5 @@
+local present, _ = pcall(require, "lsp_lines")
+
 ---@type MappingsTable
 local M = {}
 
@@ -10,15 +12,17 @@ local function l(command)
 end
 
 local function toggle_diagnostics()
-  local diagnostics_on = require("lsp_lines").toggle()
-  if diagnostics_on then
-    vim.diagnostic.config {
-      virtual_text = false,
-    }
-  else
-    vim.diagnostic.config {
-      virtual_text = { spacing = 4, prefix = " ●" },
-    }
+  if present then
+    local diagnostics_on = require("lsp_lines").toggle()
+    if diagnostics_on then
+      vim.diagnostic.config {
+        virtual_text = false,
+      }
+    else
+      vim.diagnostic.config {
+        virtual_text = { spacing = 4, prefix = " ●" },
+      }
+    end
   end
 end
 
@@ -30,6 +34,18 @@ M.disabled = {
   },
   i = {
     ["<C-e"] = "",
+  },
+}
+
+M.trouble = {
+  plugin = true,
+  n = {
+    ["<leader>mm"] = { cmd "TroubleToggle", opts = { noremap = true, silent = true } },
+    ["<leader>mw"] = { cmd "TroubleToggle workspace_diagnostics", opts = { noremap = true, silent = true } },
+    ["<leader>md"] = { cmd "TroubleToggle document_diagnostics", opts = { noremap = true, silent = true } },
+    ["<leader>ml"] = { cmd "TroubleToggle loclist", opts = { noremap = true, silent = true } },
+    ["<leader>mq"] = { cmd "TroubleToggle quickfix", opts = { noremap = true, silent = true } },
+    ["<leader>gR"] = { cmd "TroubleToggle lsp_references", opts = { noremap = true, silent = true } },
   },
 }
 
