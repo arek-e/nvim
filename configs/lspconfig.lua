@@ -11,7 +11,19 @@ if present then
 end
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "ruff_lsp" , "tailwindcss", "volar"}
+local servers = { "html", "cssls", "tsserver", "clangd", "ruff_lsp", "tailwindcss" }
+
+lspconfig.volar.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+  init_options = {
+    typescript = {
+      -- tsdk = '/path/to/.npm/lib/node_modules/typescript/lib'
+      tsdk = "/usr/local/lib/node_modules/typescript/lib",
+    },
+  },
+}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {

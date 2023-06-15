@@ -24,6 +24,7 @@ M.treesitter = {
     "yaml",
     "yuck",
     "typescript",
+    "vue",
     "tsx",
     "c",
     "markdown",

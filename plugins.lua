@@ -181,9 +181,9 @@ local plugins = {
     opts = {
       use_default_keymaps = {
         tailwind = true,
-                names = false,
-      }
-    }
+        names = false,
+      },
+    },
   },
 
   {
@@ -257,7 +257,17 @@ local plugins = {
     "windwp/nvim-ts-autotag",
     event = "BufEnter",
     config = function()
-      require("nvim-ts-autotag").setup()
+      require("nvim-ts-autotag").setup {
+        filetypes = {
+          "html",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "vue",
+          "xml",
+        },
+      }
     end,
   },
   {
