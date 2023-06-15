@@ -11,7 +11,7 @@ if present then
 end
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "ruff_lsp" }
+local servers = { "html", "cssls", "tsserver", "clangd", "ruff_lsp" , "tailwindcss", "volar"}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {

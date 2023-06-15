@@ -178,6 +178,12 @@ local plugins = {
   {
     "NvChad/nvim-colorizer.lua",
     enabled = true,
+    opts = {
+      use_default_keymaps = {
+        tailwind = true,
+                names = false,
+      }
+    }
   },
 
   {
@@ -249,6 +255,7 @@ local plugins = {
   { "mattn/emmet-vim", ft = { "html", "css", "scss", "xml" } },
   {
     "windwp/nvim-ts-autotag",
+    event = "BufEnter",
     config = function()
       require("nvim-ts-autotag").setup()
     end,
