@@ -18,3 +18,13 @@ vim.keymap.set("n", "<C-w>z", cmd("WindowsMaximize"))
 vim.keymap.set("n", "<C-w>_", cmd("WindowsMaximizeVertically"))
 vim.keymap.set("n", "<C-w>|", cmd("WindowsMaximizeHorizontally"))
 vim.keymap.set("n", "<C-w>=", cmd("WindowsEqualize"))
+
+-- Copilot
+vim.keymap.set("i", "<C-m>", "copilot#Next()", { expr = true, silent = true })
+vim.keymap.set("i", "<C-n>", "copilot#Previous()", { expr = true, silent = true })
+vim.keymap.set(
+  "i",
+  "<C-j>",
+  'copilot#Accept("<CR>")',
+  { noremap = true, silent = true, expr = true, replace_keycodes = false }
+)
