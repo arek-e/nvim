@@ -1,27 +1,4 @@
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-  -- add bluloco theme
-  {
-    "uloco/bluloco.nvim",
-    lazy = false,
-    priority = 1000,
-    dependencies = { "rktjmp/lush.nvim" },
-    config = function()
-      require("bluloco").setup({
-        transparent = true,
-        italics = true,
-      })
-    end,
-  },
-
-  -- Configure LazyVim to load gruvbox
-  -- {
-  --   "LazyVim/LazyVim",
-  --   opts = {
-  --     colorscheme = "bluloco",
-  --   },
-  -- },
 
   -- change trouble config
   {
@@ -78,11 +55,17 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+          require("plugins.configs.null-ls")
+        end,
+      },
       "jose-elias-alvarez/typescript.nvim",
       init = function()
         require("lazyvim.util").on_attach(function(_, buffer)
           -- stylua: ignore
-          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+          vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
         end)
       end,
@@ -239,17 +222,5 @@ return {
         end, { "i", "s" }),
       })
     end,
-  },
-
-  {
-    "nvimdev/lspsaga.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lspsaga").setup({})
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
   },
 }
