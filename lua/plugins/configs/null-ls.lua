@@ -9,8 +9,6 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local sources = {
   b.formatting.prettier,
-  b.code_actions.eslint_d,
-  b.formatting.rome,
   b.diagnostics.jsonlint,
   b.formatting.rustywind, -- Tailwindcss
   b.formatting.djlint,
