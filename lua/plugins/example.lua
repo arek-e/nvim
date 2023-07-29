@@ -1,22 +1,35 @@
--- since this is just an example spec, don't actually load anything here and return an empty spec
--- stylua: ignore
-if true then return {} end
-
--- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
+-- -- since this is just an example spec, don't actually load anything here and return an empty spec
+-- -- stylua: ignore
+-- if true then return {} end
 --
--- In your plugin files, you can:
--- * add extra plugins
--- * disable/enabled LazyVim plugins
--- * override the configuration of LazyVim plugins
+-- -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
+-- --
+-- -- In your plugin files, you can:
+-- -- * add extra plugins
+-- -- * disable/enabled LazyVim plugins
+-- -- * override the configuration of LazyVim plugins
 return {
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
+  -- add bluloco theme
+  {
+    "uloco/bluloco.nvim",
+    lazy = false,
+    priority = 1000,
+    dependencies = { "rktjmp/lush.nvim" },
+    config = function()
+      require("bluloco").setup({
+        transparent = true,
+        italics = true,
+      })
+    end,
+  },
 
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "bluloco",
     },
   },
 
@@ -26,9 +39,6 @@ return {
     -- opts will be merged with the parent spec
     opts = { use_diagnostic_signs = true },
   },
-
-  -- disable trouble
-  { "folke/trouble.nvim", enabled = false },
 
   -- add symbols-outline
   {
