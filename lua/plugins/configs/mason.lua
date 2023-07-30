@@ -9,5 +9,6 @@ return {
     "prettier",
     "rustywind",
     "typescript-language-server",
+    "elixir-ls",
   },
 }

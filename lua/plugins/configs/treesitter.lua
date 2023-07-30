@@ -37,5 +37,6 @@ return {
     "markdown",
     "markdown_inline",
     "go",
+    "elixir",
   },
 }
