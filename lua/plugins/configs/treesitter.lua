@@ -1,4 +1,11 @@
 return {
+  higlight = {
+    enable = true,
+    disable = {},
+  },
+  indent = {
+    enable = true,
+  },
   ensure_installed = {
     "bash",
     "query",
