@@ -28,6 +28,8 @@ local sources = {
   -- Python
   b.diagnostics.ruff,
   b.formatting.ruff,
+
+  b.formatting.beautysh,
 }
 
 null_ls.setup({
