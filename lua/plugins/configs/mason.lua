@@ -12,5 +12,7 @@ return {
     "gopls",
     "delve",
     "golines",
+    "clangd",
+    "codelldb",
   },
 }
