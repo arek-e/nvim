@@ -186,4 +186,8 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
+  {
+    "jakemason/ouroboros",
+    dependencies = { { "nvim-lua/plenary.nvim" } },
+  },
 }

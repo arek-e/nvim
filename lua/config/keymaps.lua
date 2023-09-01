@@ -18,3 +18,8 @@ vim.keymap.set("n", "<C-w>z", cmd("WindowsMaximize"))
 vim.keymap.set("n", "<C-w>_", cmd("WindowsMaximizeVertically"))
 vim.keymap.set("n", "<C-w>|", cmd("WindowsMaximizeHorizontally"))
 vim.keymap.set("n", "<C-w>=", cmd("WindowsEqualize"))
+
+vim.keymap.set("n", "<C-h>", cmd("TmuxNavigateLeft"), { desc = "TmuxNavigateLeft" })
+vim.keymap.set("n", "<C-l>", cmd("TmuxNavigateRight"), { desc = "TmuxNavigateRight" })
+vim.keymap.set("n", "<C-j>", cmd("TmuxNavigateDown"), { desc = "TmuxNavigateDown" })
+vim.keymap.set("n", "<C-k>", cmd("TmuxNavigateUp"), { desc = "TmuxNavigateUp" })

@@ -24,4 +24,9 @@ return {
       require("windows").setup()
     end,
   },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
 }
