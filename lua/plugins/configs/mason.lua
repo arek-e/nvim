@@ -14,5 +14,7 @@ return {
     "golines",
     "clangd",
     "codelldb",
+    "angular-language-server",
+    "ansible-language-server",
   },
 }

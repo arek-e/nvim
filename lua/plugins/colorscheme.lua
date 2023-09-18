@@ -1,19 +1,7 @@
 return {
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
-  -- add bluloco theme
-  {
-    "uloco/bluloco.nvim",
-    lazy = false,
-    priority = 1000,
-    dependencies = { "rktjmp/lush.nvim" },
-    config = function()
-      require("bluloco").setup({
-        transparent = true,
-        italics = true,
-      })
-    end,
-  },
+  { "rebelot/kanagawa.nvim" },
 
   {
     "navarasu/onedark.nvim",
@@ -30,7 +18,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "onedark",
+      colorscheme = "kanagawa",
     },
   },
 }

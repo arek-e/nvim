@@ -10,7 +10,7 @@ return {
     config = function()
       require("neo-tree").setup({
         window = {
-          position = "right",
+          position = "left",
         },
       })
     end,
