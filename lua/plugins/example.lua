@@ -31,29 +31,6 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "nvimtools/none-ls.nvim",
-        config = function()
-          require("plugins.configs.null-ls")
-        end,
-      },
-      "jose-elias-alvarez/typescript.nvim",
-      init = function()
-        require("lazyvim.util").on_attach(function(_, buffer)
-          -- stylua: ignore
-          vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-          vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-        end)
-      end,
-      config = function()
-        require("plugins.configs.lspconfig")
-      end,
-    },
-  },
-
-  {
     "nvim-treesitter/nvim-treesitter",
     opts = require("plugins.configs.treesitter"),
   },
